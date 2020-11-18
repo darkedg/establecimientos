@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EstablecimientoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,4 +20,8 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('/establecimiento/create', [EstablecimientoController::class, 'create'])->name('establecimiento.create');
+    Route::get('/establecimiento/edit', [EstablecimientoController::class, 'edit'])->name('establecimiento.edit');
+});
+
