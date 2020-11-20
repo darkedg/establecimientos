@@ -15,8 +15,12 @@
     <div class="mt-5 row justify-content-center">
       <form
         class="col-md-9 col-xs-12 card card-body"
-        action=""
+        action="{{ route('establecimiento.store') }}"
+        method="POST"
+        enctype="multipart/form-data"
       >
+        @csrf
+
         <fieldset class="border p-4">
           <legend class="text-primary">Nombre, categoria e imagen principal</legend>
 
@@ -38,11 +42,11 @@
             @enderror
           </div>
 
-          <div class="form-group @error('categoria_id') is-invalid @enderror">
+          <div class="form-group">
             <label for="categoria">Categoria</label>
 
             <select
-              class="form-control"
+              class="form-control @error('categoria_id') is-invalid @enderror"
               name="categoria_id"
               id="categoria_id"
             >
@@ -55,6 +59,11 @@
                 >{{ $categoria->nombre }}</option>
               @endforeach
             </select>
+            @error('categoria_id')
+              <div class="invalid-feedback">
+                {{ $message }}
+              </div>
+            @enderror
           </div>
           
           <div class="form-group">
@@ -104,6 +113,7 @@
               class="form-control @error('direccion') is-invalid @enderror"
               placeholder="Dirección"
               value="{{ old('direccion') }}"
+              name="direccion"
             >
             @error('direccion')
               <div class="invalid-feedback">
@@ -121,6 +131,7 @@
               class="form-control @error('colonia') is-invalid @enderror"
               placeholder="Zona"
               value="{{ old('colonia') }}"
+              name="colonia"
             >
             @error('colonia')
               <div class="invalid-feedback">
@@ -159,6 +170,7 @@
             <textarea
                 class="form-control  @error('descripcion')  is-invalid  @enderror" 
                 name="descripcion"
+                placeholder="Escriba descripción, al menos 50 caracteres."
             >{{ old('descripcion') }}</textarea>
             @error('descripcion')
               <div class="invalid-feedback">

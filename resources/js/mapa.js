@@ -4,8 +4,9 @@ const provider = new OpenStreetMapProvider();
 document.addEventListener('DOMContentLoaded', () => {
 
   if(document.querySelector('#mapa')) {
-    const lat = -16.4949688;
-    const lng = -68.1552912;
+
+    const lat = document.querySelector('#lat').value === '' ? -16.4949688 : document.querySelector('#lat').value;
+    const lng = document.querySelector('#lng').value === '' ? -68.1552912 : document.querySelector('#lng').value;
 
     const mapa = L.map('mapa').setView([lat, lng], 16);
 
