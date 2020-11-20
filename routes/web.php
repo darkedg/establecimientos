@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EstablecimientoController;
+use App\Http\Controllers\ImagenController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,5 +24,7 @@ Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/establecimiento/create', [EstablecimientoController::class, 'create'])->name('establecimiento.create');
     Route::get('/establecimiento/edit', [EstablecimientoController::class, 'edit'])->name('establecimiento.edit');
-});
 
+    Route::post('imagenes/store', [ImagenController::class, 'store'])->name('imagenes.store');
+    Route::post('imagenes/destroy', [ImagenController::class, 'destroy'])->name('imagenes.destroy');
+});
